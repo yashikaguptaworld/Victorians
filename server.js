@@ -329,7 +329,7 @@ app.post("/play-det", async function (req, resp) {
             picurl2 = picUrlResult2.url;
             console.log("Pic2 URL:", picurl2);
 
-            jsonData = await RajeshBansalKaChirag(picurl2);
+            
         }
     } catch (err) {
         console.error("Error processing profilePic2:", err.message);
