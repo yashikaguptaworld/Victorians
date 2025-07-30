@@ -272,8 +272,6 @@ app.get("/delete-one", function (req, resp) {
 //================================================================================================================================================================================
 
 
-
-app.post("/play-det", async function (req, resp) {
  
 
 async function RajeshBansalKaChirag(imgurl) {
@@ -299,82 +297,71 @@ async function RajeshBansalKaChirag(imgurl) {
     return jsonData
 
 }
+app.post("/play-det", async function (req, resp) {
+    let picurl = "nopic.jpg";
+    let picurl2 = "nopic.jpg";
+    let jsonData = [];
 
-app.post("/picreader", async function (req, resp) {
-     let profilePic1 = "";
-    let profilePic2 = "";
-    let jsonData=[];
-    try{
+    try {
+        if (req.files && req.files.profilePic1) {
+            const fName1 = req.files.profilePic1.name;
+            const locationToSave1 = __dirname + "/public/uploads/" + fName1;
+            await req.files.profilePic1.mv(locationToSave1);
 
-    
-    if (req.files != null) {
-     let    fName = req.files.profilePic1.name;
-        let locationToSave = __dirname + "/public/uploads/" + fName;//full ile path
+            const picUrlResult1 = await cloudinary.uploader.upload(locationToSave1);
+            picurl = picUrlResult1.url;
+            console.log("Pic1 URL:", picurl);
 
-      await  req.files.profilePic1.mv(locationToSave);//saving file in uploads folder
-
-        //saving ur file/pic on cloudinary server
-        
-            await cloudinary.uploader.upload(locationToSave).then(async function (picUrlResult) {
-             profilePic1=picUrlResult.url;
-             console.log(profilePic1);
-                 jsonData = await RajeshBansalKaChirag(picUrlResult.url);
-            });
+            jsonData = await RajeshBansalKaChirag(picurl);
         }
-        else
-            profilePic1="nopic.jpg";
-    }
-     catch{
-        console.log("cloudinary crash");
+    } catch (err) {
+        console.error("Error processing profilePic1:", err.message);
+        return resp.status(400).send("Error with profilePic1: " + err.message);
     }
 
+    try {
+        if (req.files && req.files.profilePic2) {
+            const fName2 = req.files.profilePic2.name;
+            const locationToSave2 = __dirname + "/public/uploads/" + fName2;
+            await req.files.profilePic2.mv(locationToSave2);
 
-    try{    
-    if (req.files != null) {
-     let    fName = req.files.profilePic2.name;
-        let locationToSave = __dirname + "/public/uploads/" + fName;//full ile path
+            const picUrlResult2 = await cloudinary.uploader.upload(locationToSave2);
+            picurl2 = picUrlResult2.url;
+            console.log("Pic2 URL:", picurl2);
 
-      await  req.files.profilePic2.mv(locationToSave);//saving file in uploads folder
-
-        //saving ur file/pic on cloudinary server
-        
-            await cloudinary.uploader.upload(locationToSave).then(async function (picUrlResult) {
-             profilePic2=picUrlResult.url;
-             console.log(profilePic2);
-                 jsonData = await RajeshBansalKaChirag(picUrlResult.url);
-            });
+            jsonData = await RajeshBansalKaChirag(picurl2);
         }
-        else
-            profilePic2="nopic.jpg";
-    }
-    catch{
-        console.log("cloudinary crash");
+    } catch (err) {
+        console.error("Error processing profilePic2:", err.message);
+        return resp.status(400).send("Error with profilePic2: " + err.message);
     }
 
-                let emailid = req.body.txtEmail4;
-                let NAME = jsonData.NAME;
-                let dob = jsonData.dob;
-                
-                let gender = jsonData.gender;
-                let address = req.body.Address4;
-                let contact = req.body.Contact4;
-                let sports = req.body.Game4;
-                let other = req.body.About4;
+    // Final step: Insert into DB
+    try {
+        const emailid = req.body.txtEmail4;
+        const NAME = jsonData.name;
+        const dob = jsonData.dob;
+        const gender = jsonData.gender;
+        const address = req.body.Address4;
+        const contact = req.body.Contact4;
+        const sports = req.body.Game4;
+        const other = req.body.About4;
 
-                mySqlVen.query("insert into players values(?,?,?,?,?,?,?,?,?,?)", [emailid,profilePic1,profilePic2, NAME, dob, gender, address, contact, sports, other], function (errKuch) {
-                    if (errKuch == null)
-                        resp.send("Record Saved Successfulllyyy....Badhai");
-                    else
-                        resp.send(errKuch.message)
-                })
+        
 
-
-                resp.send(jsonData);
-
-            });
-
-        }) 
-    
+        mySqlVen.query( "INSERT INTO players VALUES (?,?,?,?,?,?,?,?,?,?)",[emailid, picurl, picurl2, NAME, dob, gender, address, contact, sports, other], function (errKuch) {
+                if (errKuch == null) {
+                    resp.send("Record Saved Successfully... बधाई हो!");
+                } else {
+                   
+                    resp.send(errKuch.message);
+                }
+            }
+        );
+    } catch (err) {
+        resp.status(500).send("Server Error during DB insert.");
+    }
+});    
 
 
 //=====================================================================================================================================================================================
