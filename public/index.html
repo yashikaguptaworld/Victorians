@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+    crossorigin="anonymous"></script>
+
+
+
+  <style>
+    .ok {
+      color: green;
+      padding: 1px;
+      background-color: greenyellow;
+      border-radius: 2px;
+    }
+
+    .not-ok {
+      color: white;
+      padding: 1px;
+      background-color: red;
+      border-radius: 2px;
+    }
+
+    .ok-pic {
+      width: 20px;
+      height: 20px;
+      background-image: url(pics/tick.png);
+      background-size: contain;
+    }
+
+    .not-ok-pic {
+      width: 20px;
+      height: 20px;
+      background-image: url(pics/cross.png);
+      background-size: contain;
+    }
+
+    #cross {
+      width: 40px;
+      height: 40px;
+      background-image: url(./pics/cross.png);
+      background-size: contain;
+      float: right;
+    }
+  </style>
+
+
+  <script>
+    $(document).ready(function () {
+      $("#txtEmail").keyup(function () {
+        let email = $(this).val();//getter
+        //  let regex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+        let regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+        if (email == "") {
+          $("#errMsgE").html("Empty").addClass("not-ok").removeClass("ok");
+          $("#errPicE").addClass("not-ok-pic").removeClass("ok-pic");
+          $(this).focus();
+        }
+        else if (regex.test(email) == false) {
+          $("#errMsgE").html("Invalid Emailid").addClass("not-ok").removeClass("ok");
+          $("#errPicE").addClass("not-ok-pic").removeClass("ok-pic");
+          $(this).focus();
+        }
+        else {
+          $("#errMsgE").html("Okay").addClass("ok").removeClass("not-ok");
+          $("#errPicE").addClass("ok-pic").removeClass("not-ok-pic");
+        }
+
+      })
+      //==========================================
+      $("#txtPwd").blur(function () {
+        let regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+        let pwd = $(this).val();
+        if (regex.test(pwd) == true)
+          $("#lblPwd").html("CORRECT");
+        else
+          $("#lblPwd").html("INCORRECT PLEASE ADD ATLEAST 8 CHARACTERS INCLUDING LARGE CHARACTER,SMALL CHARACTER,SPECIAL CHARACTER,NUMBER");
+      })
+      //========================
+      $("#eye").click(function () {
+        let txt = $("#txtPwd").prop("type");
+        if (txt == "password") {
+          $("#txtPwd").prop("type", "text");//type changed
+          $("#eye").removeClass("fa-eye").addClass("fa-eye-slash");
+        }
+        else {
+          $("#txtPwd").prop("type", "password");
+          $("#eye").removeClass("fa-eye-slash").addClass("fa-eye");
+        }
+
+
+      })
+
+    })
+
+  </script>
+
+
+
+
+
+  <script>
+    $(document).ready(function () {
+      $("#txtEmail2").keyup(function () {
+        let email = $(this).val();//getter
+        //  let regex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+        let regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+        if (email == "") {
+          $("#errMsgE2").html("Empty").addClass("not-ok").removeClass("ok");
+          $("#errPicE2").addClass("not-ok-pic").removeClass("ok-pic");
+          $(this).focus();
+        }
+        else if (regex.test(email) == false) {
+          $("#errMsgE2").html("Invalid Emailid").addClass("not-ok").removeClass("ok");
+          $("#errPicE2").addClass("not-ok-pic").removeClass("ok-pic");
+          $(this).focus();
+        }
+        else {
+          $("#errMsgE2").html("Okay").addClass("ok").removeClass("not-ok");
+          $("#errPicE2").addClass("ok-pic").removeClass("not-ok-pic");
+        }
+
+      })
+
+      //========================
+      $("#eye1").click(function () {
+        let txt = $("#txtPwd2").prop("type");
+        if (txt == "password") {
+          $("#txtPwd2").prop("type", "text");//type changed
+          $("#eye1").removeClass("fa-eye").addClass("fa-eye-slash");
+        }
+        else {
+          $("#txtPwd2").prop("type", "password");
+          $("#eye1").removeClass("fa-eye-slash").addClass("fa-eye");
+        }
+
+
+      })
+
+    })
+
+  </script>
+  <script>
+
+
+    $(document).ready(function () {
+      $("#Signup").click(function () {
+        let emailid = $("#txtEmail").val();
+        let pwd = $("#txtPwd").val();
+        alert(pwd);
+        let obj = {
+          type: "get",
+          url: "/get-one",
+          data: {
+            txtEmail: emailid,
+            pass: pwd,
+            combo: $("#combouser").val(),
+          }
+
+        }
+        $.ajax(obj).then(
+          function (responseJsonAry) {
+            alert(JSON.stringify(responseJsonAry))
+            //  let emailid=responseJsonAry[0].txtEmail;
+            //  let pwd=responseJsonAry[0].txtPwd;
+
+
+            //  alert(emailid+"\n"+pwd);
+            //  $("#txtEmail").val(emailid);
+            //  $("#txtPwd").val(pwd);
+
+
+          }).fail(function (err) { alert(err.message) })
+      })
+
+
+
+      $("#Login2").click(function () {
+
+        // let emailValue = $("#txtEmail2").val();
+
+        let obj = {
+          type: "get",
+          url: "/chk-login",
+          data: {
+            txtEmail2: $("#txtEmail2").val(),
+            txtPwd2: $("#txtPwd2").val()
+          }
+
+        }
+        $.ajax(obj).then(
+          function (response) {
+            alert("*" + response + "*");
+            if (response == "Blocked")
+              alert("Sorry ! your id is blocked")
+
+
+            else if (response == "Invalid")
+              alert("Invalid emailid or password")
+
+            else
+              if (response == "player") {
+                localStorage.setItem("activeUser", $("#txtEmail2").val());
+                location.href = "dash-player.html";
+              }
+              else if (response == "oragnaization") {
+                localStorage.setItem("activeUser", $("#txtEmail2").val());
+                location.href = "dash-organizer.html";
+              }
+              else if (response == "admin") {
+                localStorage.setItem("activeUser", $("#txtEmail2").val());
+                location.href = "dash-admin.html"
+              }
+          }).fail(function (errKuch) { alert(errKuch.message) })
+      })
+
+    }
+    )
+
+
+
+  </script>
+
+  <style>
+    .img-fluid {
+      width: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .button-container {
+      margin: auto;
+      display: flex;
+      gap: 10px;
+      /* space between buttons */
+    }
+
+    #go-top {
+      width: 40px;
+      line-height: 40px;
+      background-color: #10367e;
+      color: white;
+      position: fixed;
+      /*containg absolute also*/
+      text-align: center;
+      cursor: pointer;
+      bottom: 50px;
+      right: 50px;
+    }
+
+
+
+
+    #logo {
+      border: 1px black solid;
+      width: 40px;
+      height: 40px;
+      float: left;
+      margin-top: -1px;
+      background-image: url(/pics/Screenshot\ 2025-07-20\ 100601.png);
+      background-size: contain;
+      margin-left: 20px;
+      border-radius: 50%;
+      transition: ease all 1s;
+
+    }
+
+    #logo:hover {
+      transform: scale(1.2);
+      transition: ease all 1s;
+    }
+  </style>
+</head>
+
+
+
+
+<body id="top">
+  <a href="#top">
+    <div id="go-top">
+      <i class="fa-solid fa-arrow-up"></i> TOP
+    </div>
+  </a>
+
+  <nav class="navbar bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="/pics/Screenshot 2025-07-20 100601.png" id="logo" alt="">
+        <div class="d-inline-block align-text-top"
+          style="color: white ;  margin-left: 10px; font-size: x-large; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;  font-style: italic;">
+          <i class="fa-brands fa-web-awesome fa-beat"></i> VICTORIANS
+        </div>
+      </a>
+    </div>
+    <div class="ms-auto">
+      <div class="me-5 bg-primary" style="color: white ;margin-top:-40px;">
+
+
+
+        <div class="button-container">
+          <CENTER>
+            <button type="button" class="btn btn-primary" value="Signup" data-bs-toggle="modal"
+              data-bs-target="#divSignup" style="font-family: serif;">SIGNUP</button>
+          </CENTER>
+
+
+
+          <CENTER>
+            <button type="button" class="btn btn-primary" value="Login" data-bs-toggle="modal"
+              data-bs-target="#divLogin" style="font-family: serif;">LOGIN</button>
+          </CENTER>
+
+        </div>
+      </div>
+  </nav>
+
+
+
+
+
+
+  <div class="card text-bg-dark">
+    <img src="/pics/Screenshot 2025-07-20 153851.png" class="card-img" alt="...">
+    <div class="card-img-overlay text-end">
+      <H1 class="card-title" style="margin-top: 120px; margin-right: 250px;"><U>EXPLORE<br> YOUR<br> POTENTIAL</U></H1>
+
+      <p class="card-text" style="margin-right: 250PX;"><small>YOUR SUCCESS STARTS HERE</small></p>
+    </div>
+  </div>
+  <!-- Bootstrap Carousel -->
+  <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="5000" style="position: relative;">
+        <img src="pics/Screenshot 2025-07-24 100858.png" class="d-block w-100 img-fluid" alt="Slide 1"
+          style="height: 60vh; object-fit: cover;">
+
+
+        <div
+          class="position-absolute top-50 start-50 translate-middle text-center text-white bg-dark bg-opacity-50 p-3 rounded w-75">
+         <h3 class="fs-2 fs-md-2 fs-lg-2 text-warning">
+      <i class="fa-solid fa-star fa-bounce"></i>
+      Welcome to <strong class="text-uppercase">Victorians</strong>
+      <i class="fa-solid fa-star fa-bounce"></i>
+    </h3>
+
+        </div>
+      </div>
+
+
+      <div class="carousel-item " data-bs-interval="5000" style="position: relative;">
+        <img src="pics/Screenshot 2025-07-20 193727.png" class="d-block w-100 img-fluid" alt="Slide 2"
+          style="height: 60vh; object-fit: cover;">
+
+
+        <div
+          class="position-absolute top-50 start-50 translate-middle text-center text-white bg-dark bg-opacity-50 p-3 rounded w-75">
+          <h3 class="fs-4 fs-md-3 fs-lg-2">ABOUT US</h3>
+          <p class="fs-6 fs-md-5">At Explore Sports Tournament, we bring athletes, fans, organization and communities
+            together through thrilling competitions that celebrate skill, teamwork, and the love of the game Our mission
+            is
+            to provide a professional and inclusive platform for sports enthusiasts to compete, connect, and grow—both
+            on
+            and off the field.</p>
+          <button type="button" class="btn btn-primary">READ MORE</button>
+        </div>
+      </div>
+
+     
+
+     
+
+    </div>
+
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <!--  <div class="position-relative text-center">
+    <img src="/pics/Screenshot 2025-07-20 193727.png" class="img-fluid" alt="Image" style="height: 500px;">
+    <div class="position-absolute top-50 start-50 translate-middle text-white">
+      <h3 style="color: black; font-family: serif;">ABOUT US</h3>
+      <H5 style="color: #5cb43a ;">At Explore Sports Tournament, we bring athletes, fans, organization and communities
+        together through thrilling competitions that celebrate skill, teamwork, and the love of the game Our mission is
+        to provide a professional and inclusive platform for sports enthusiasts to compete, connect, and grow—both on
+        and off the field.
+
+      </H5>
+      
+    </div>
+  </div>
+  -->
+  <div style="background-color: #10367e;">
+    <br>
+    <CENTER>
+      <h1 style="color: white ; font-family: serif;"><i class="fa-brands fa-servicestack fa-flip"></i> OUR SERVICES <i class="fa-brands fa-servicestack fa-flip"></i> </h1>
+    </CENTER>
+
+    <BR>
+
+    <div class="container" >
+      <div class="row">
+        <div class="col-md-3 ">
+          <div class="card" style="float: left;">
+            <img src="pics/Screenshot 2025-07-20 202330.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Tournament Organization</h5>
+              <p class="card-text">
+                <center>Complete planning and execution of sports tournaments across multiple disciplines.<br> What sets
+                  us apart?<br> A commitment to transparency, top-tier event management, and a dynamic community that
+                  values competition as much as camaraderie.</center>
+
+              </p>
+              <center>
+                <a data-bs-toggle="modal" data-bs-target="#divSignup" class="btn btn-primary">
+                  <center><i class="fa-solid fa-medal fa-bounce"></i> EXPLORE</center>
+                </a>
+              </center>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 ">
+          <div class="card" style="height: 612px; float: left;">
+            <img src="pics/Screenshot 2025-07-20 203640.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">
+                <center>Team & Player Management</center>
+              </h5>
+              <p class="card-text">
+                <center>Manage squads, rosters, and player stats all in one place.Certified referees and structured
+                  rules to ensure fairness and professionalism.
+                  <ul type="disc">
+                    <li> AI based data-reader & Secure login
+
+                    </li>
+                    <li>Personal stats and achievements
+
+                    </li>
+                    <li>View upcoming fixtures</li>
+                  </ul>
+                </center>
+              </p>
+              <center>
+                <a data-bs-toggle="modal" data-bs-target="#divSignup" class="btn btn-primary">
+                  <center><i class="fa-solid fa-person-running fa-flip"></i> EXPLORE</center>
+                </a>
+              </center></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 ">
+
+          <div class="card" style=" height: 612px">
+            <img src="pics/Screenshot 2025-07-20 204406.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">
+                <center>Media Coverage & Photography</center>
+              </h5>
+              <p class="card-text">Capture the best moments with professional photo, video, and social media content.Get
+                cinematic tournament highlights, match recaps, and player features.Media coverage that boosts visibility
+                for teams, clubs, and partners.<br>Get featured on our Instagram, Facebook, or other social platform
+                with standout moments.</p>
+              <center>
+                <a data-bs-toggle="modal" data-bs-target="#divSignup" class="btn btn-primary">
+                  <center><i class="fa-brands fa-teamspeak fa-beat"></i> EXPLORE</center>
+                </a>
+              </center></a>
+              </center>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 ">
+          <div class="card" style="float: left;">
+            <img src="pics/Screenshot 2025-07-20 210822.png" class="card-img-top" alt="..." style="height: 230px;">
+            <div class="card-body">
+              <CENTER>
+                <h5 class="card-title">HEALTHY RELATION AND PATHWAY</h5>
+              </CENTER>
+              <p class="card-text">We Provide HARMONIOUS AND RESPECTFUL Connection by Transparent communication channels
+                as Player Support Desk-A dedicated helpline to handle queries or grievances. we provide opportunity&
+                exposure well maintained pics of certificates and data for avoid future disturbances. </p>
+              <center>
+                <a data-bs-toggle="modal" data-bs-target="#divSignup" class="btn btn-primary">
+                  <center><i class="fa-solid fa-handshake fa-beat "></i> EXPLORE</center>
+                </a>
+              </center></a>
+            </div>
+          </div>
+        </div>
+
+      </div><br>
+    </div>
+  </div>
+
+  </div>
+  </div>
+  </div>
+  <div style="background-color: #10367e ;">
+    <div>
+      <CENTER>
+        <h3 style="background-color: #10367e  ; color:#10367e ;">.</h3>
+      </CENTER>
+      <div class="container my-5">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <img src="pics/Screenshot 2025-07-20 221510.png" class="img-fluid rounded" alt="Side Image"
+              style="width: 500px;">
+          </div>
+          <div class="col-md-6">
+            <h2 style="color: white;font-family: serif;"><i class="fa-solid fa-trophy fa-beat" style="color: white;"></i>
+              MISSION <i class="fa-solid fa-trophy fa-beat" style="color: white;"></i></h2>
+            <div style="color: white;">
+              <p>
+                At Explore Sports Tournament, our mission is to empower athletes, elevate grassroots talent, and create
+                unforgettable sporting experiences through professionally managed, accessible, and technology-driven
+                tournaments.
+                Connect players, teams, and communities through the spirit of fair play and competition.
+                Provide a platform where emerging talent can showcase skills and grow through structured development
+                pathways.
+                we provide opportunity& exposure well maintained pics of certificates and data for avoid future
+                disturbances.
+                Leverage innovation and media to amplify every moment—turning local games into shareable, global
+                stories.
+                Foster a culture of integrity, inclusion, and excellence on and off the field.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <BR><BR><BR>
+
+
+    <div style="color: white;font-family: serif;">
+      <H2>
+        <CENTER> MEET THE DEVALOPERS </CENTER>
+      </H2>
+    </div>
+    <BR><br>
+
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-6 mb-4">
+          <div class="card h-100">
+            <div class="row g-0 align-items-center">
+              <div class="col-4">
+                <img src="pics/Screenshot 2025-07-21 092926.png" class="img-fluid rounded-start" alt="Image 1"
+                  style="width: 100px; height: 150px; margin-left: 70px;">
+              </div>
+              <div class="col-8">
+                <div class="card-body">
+                  <h5 class="card-title">UNDER THE GUIDENCE OF</h5>
+                  <p class="card-text">MR. RAJESH BANSAL <BR> AUTHOR OF <I>REAL JAVA</I></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-6 mb-4">
+          <div class="card h-100">
+            <div class="row g-0 align-items-center">
+              <div class="col-4">
+                <img src="pics/Screenshot 2025-07-21 092505.png" class="img-fluid rounded-start" alt="Image 2"
+                  style="width: 100px; height: 150px; margin-left: 70px; border-radius: 5px;">
+              </div>
+              <div class="col-8">
+                <div class="card-body">
+                  <h5 class="card-title">DEVELOPED BY</h5>
+                  <p class="card-text">MS. YASHIKA GUPTA<BR> (STUDENT)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <BR><BR>
+    <DIV style="color: white;font-family: serif;">
+      <center>
+        <h3><i class="fa-solid fa-location-dot fa-beat-fade"></i> REACH US</h3>
+      </center>
+    </DIV>
+
+
+    <div class="container my-5">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d416.67377300019757!2d74.92641618799452!3d30.20507987139332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391733554ee53cb1%3A0x9ab85c6f1f9ea895!2sCrorepati%20Grocery%20Shop!5e0!3m2!1sen!2sin!4v1753357134024!5m2!1sen!2sin" 
+            style="width: 500px;" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+
+        </div>
+        <div class="col-md-6">
+          <h2 style="color: white;">CONTACT</h2>
+          <div style="color: white;">
+            <p>
+              Organization Name: VICTORIANS
+              <BR>Your Success starts here
+              <br>
+              WEBSITE: loacalhost:2006
+              <BR>
+              visit us: SAS NAGAR,SURKHPEER ROAD,BATHINDA,PUNJAB,INDIA
+              <BR>
+              CONTACT info: 7973227865,9872144380
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- MODAL -->
+  <div class="modal fade" tabindex="-1" id="divSignup">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">Signup Here</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+          <form>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+              <div style="display: flex;">
+                <div style="margin-right: 10px;" id="errPicE"></div>
+                <div id="errMsgE"></div>
+              </div>
+
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password <i class="fa-solid fa-eye fa-bounce"
+                  id="eye"></i></label>
+              <input type="password" class="form-control" id="txtPwd">
+              <div id="lblPwd" style="color: red;"></div>
+
+
+            </div>
+            <div class="mb-3 form-check">
+              <label class="form-check-label" for="exampleCheck1">
+                <tr>
+                  <td>
+                    I AM <br>
+                    <select class="form-select" id="combouser">
+                      <option>Select</option>
+                      <option value="oragnaization">ORGANIZATION</option>
+                      <option value="player">PLAYER</option>
+                      
+
+                    </select>
+                  </td>
+                </tr>
+              </label>
+            </div>
+
+          </form>
+          </p>
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-primary" id="Signup">Signup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="modal fade" tabindex="-1" id="divLogin">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">Login Here</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+          <form>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="txtEmail2" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+
+              <div style="display: flex;">
+                <div style="margin-right: 10px;" id="errPicE2"></div>
+                <div id="errMsgE2"></div>
+              </div>
+
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password <i class="fa-solid fa-eye fa-bounce"
+                  id="eye1"></i></label>
+              <input type="password" class="form-control" id="txtPwd2">
+
+            </div>
+            <div class="mb-3 form-check">
+              <label class="form-check-label" for="exampleCheck1"> </label>
+            </div>
+
+
+          </form>
+          <button type="button" class="btn btn-primary " id="Login2">LOGIN</button>
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!--
+
+
+    <CENTER>
+      <a href="dash-organizer.html"> <button type="button" class="btn btn-danger" value="org-dash" id="org"
+          style="background-color: red; color: white; ">Organizer Dashboard</button >
+      </a>
+    </CENTER>
+
+
+    <CENTER>
+      <a href="dash-player.html"> <button type="button" class="btn btn-danger" value="player" id="player"
+          style="background-color: red; color: white; "> PLAYER DASHBOARD</button>
+      </a>
+    </CENTER>
+
+    <CENTER>
+      <a href="dash-admin.html"> <button type="button" class="btn btn-danger" value="org-dash" id="org"
+          style="background-color: red; color: white; ">USER ADMIN PANNEL</button>
+      </a>
+    </CENTER>
+
+  -->
+
+  </div>
+
+  <BR><BR><BR><BR><BR><BR><BR>
+  </div>
+  <nav class="navbar fixed-bottom bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" style="width:2000px; color: white;""><CENTER><i class=" fa-solid fa-trophy"
+        style="color: white;"></i> WARRIOR <i class="fa-solid fa-trophy" style="color: white;"></i></CENTER></a>
+    </div>
+  </nav>
+</body>
+
+</html>

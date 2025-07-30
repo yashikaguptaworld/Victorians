@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+
+
+    <style>
+        .card {
+            width: 320px;
+            height: 350px;
+            border: 1px black solid;
+            background-color: white;
+            border-radius: 5%;
+
+
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+
+
+        }
+
+         #logo {
+      border: 1px black solid;
+      width: 40px;
+      height: 40px;
+      float: left;
+      margin-top: -1px;
+      background-image: url(/pics/Screenshot\ 2025-07-20\ 100601.png);
+      background-size: contain;
+      margin-left: 20px;
+      border-radius: 50%;
+      transition: ease all 1s;
+
+    }
+
+    #logo:hover {
+      transform: scale(1.2);
+      transition: ease all 1s;
+    }
+    </style>
+    <script>
+
+        function showUser() {
+            let activeUser = localStorage.getItem("activeUser");
+            document.getElementById("welcome").innerHTML = activeUser;
+        }
+
+         function doLogout(){
+            localStorage.removeItem("activeUser");
+            location.href="index.html";
+        }
+    </script>
+
+</head>
+
+<body bgcolor="white" onload="showUser();">
+
+    <nav class="navbar bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="/pics/Screenshot 2025-07-20 100601.png" id="logo" alt="">
+        <div class="d-inline-block align-text-top"
+          style="color: white ;  margin-left: 10px; font-size: x-large; font-style: italic;"> VICTORIANS
+        </div>
+      </a>
+    </div>
+            <div class="ms-auto">
+                <div class="me-5 bg-primary" style="color: white ;margin-top:-40px;"><i class="fa-solid fa-rainbow"></i> GREETS</div>
+                <span class="navbar-text" style="color: white;">
+                    .<span id="welcome">*</span>
+                </span>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <center>
+        <h1>Welcome to Organizer's Dashboard</h1>
+    </center>
+    <br><br>
+    <div class="container" style="width: 1000px;">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="card" style="width: 16rem;">
+                            <img src="/pics/Screenshot 2025-07-11 183822.png" class="card-img-top" alt="..."
+                                style=" border-radius: 5%;">
+                            <div class="card-body">
+                                <center>
+                                    <h5 class="card-title"></h5>
+                                </center>
+                                <p class="card-text"></p>
+                                <center> <a href="organisation.html" class="btn btn-outline-primary">SUBMIT YOUR
+                                        DETAILS</a>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 ">
+                        <div class="card" style="width: 16rem;">
+                            <img src="/pics/Screenshot 2025-07-11 190132.png" class="foto" alt="..."
+                                style=" width: 254px; height: 250px;border-radius: 5%;">
+                            <div class="card-body">
+                                <center>
+                                    <h5 class="card-title"></h5>
+                                </center>
+                                <p class="card-text"></p>
+                                <center> <a href="post.html" class="btn btn-outline-primary">POST NEW EVENTS</a>
+                                </center>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 ">
+
+                        <div class="card" style="width: 16rem;">
+                            <img src="/pics/Screenshot 2025-07-14 232252.png" class="foto2" alt="..."
+                                style=" width: 253px;   height: 250px;  border-radius: 5%;">
+                            <div class="card-body">
+                                <center>
+                                    <h5 class="card-title"></h5>
+                                </center>
+                                <p class="card-text"></p>
+                                <center> <a href="angularhttp.html" class="btn btn-outline-primary">SHOW ALL EVENTS</a>
+                                </center>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <br><br>
+<center>
+    <button type="button" class="btn btn-primary" onclick="doLogout();">LOG-OUT</button>
+</center>
+   <nav class="navbar fixed-bottom bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" style="width:2000px; color: white;""><CENTER><i class="fa-solid fa-trophy" style="color: white;"></i> WARRIOR <i class="fa-solid fa-trophy" style="color: white;"></i></CENTER></a>
+  </div>
+</nav>
+
+</body>
+
+</html>

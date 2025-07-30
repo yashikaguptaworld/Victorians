@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+         var mymodule= angular.module("kuchModule",[]);
+
+         mymodule.controller("kuchController",function($scope,$http)
+        {
+       $scope.jsonArray=[];
+       $scope.txtEmail5="";
+       $scope.doFetchAll=function()
+       {
+        // alert();
+            var url="/users?emailid="+localStorage.getItem("activeUser");
+            
+            $http.get(url).then(allGoodFx,someBadFx);
+            function allGoodFx(response)
+            {
+                //resp in JSON array
+               // alert(JSON.stringify(response.data));
+                $scope.jsonArray=response.data;
+            }
+
+            function someBadFx(response)
+            {
+              //  alert(JSON.stringify(response.data));
+            }
+          }
+
+          $scope.doDelete=function(rid)
+       {
+        
+            var url="/delete-one?ridKuch="+rid;//+"&pwdKuch="+pwd;
+            
+            $http.get(url).then(allGoodFx,someBadFx);
+            function allGoodFx(response)
+            {
+             //  alert(response.data);//resp in string
+                $scope.doFetchAll();
+            }
+
+            function someBadFx(response)
+            {
+               // alert(JSON.stringify(response.data));
+            }
+       }
+     
+        })
+
+         
+    </script>
+    <style>
+       #logo {
+      border: 1px black solid;
+      width: 40px;
+      height: 40px;
+      float: left;
+      margin-top: -1px;
+      background-image: url(/pics/Screenshot\ 2025-07-20\ 100601.png);
+      background-size: contain;
+      margin-left: 20px;
+      border-radius: 50%;
+      transition: ease all 1s;
+
+    }
+
+    #logo:hover {
+      transform: scale(1.2);
+      transition: ease all 1s;
+    }
+    </style>
+
+      <script>
+
+        function showUser()
+        {
+            let activeUser=localStorage.getItem("activeUser");
+            document.getElementById("txtEmail5").value=activeUser;
+        }
+    </script>
+
+</head>
+<body onload="showUser();" ng-app="kuchModule" ng-controller="kuchController" ng-init="doFetchAll();">   <!--ng-init="doFetchAll();" -->
+   <nav class="navbar bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="/pics/Screenshot 2025-07-20 100601.png" id="logo" alt="">
+        <div class="d-inline-block align-text-top"
+          style="color: white ;  margin-left: 10px; font-size: x-large; font-style: italic;"> VICTORIANS
+        </div>
+      </a>
+    </div>
+    </nav>
+         <br><br>
+   
+   
+    <center>
+        <i class="fa-solid fa-bars-progress"></i>
+
+         <label for="inputEmail4" class="form-label">Email</label>
+          <input type="email" class="form-control" name="txtEmail5" id="txtEmail5" ng-model="txtEmail5" style="text-align: center;">
+    <br>
+
+           <input type="button"  class="btn btn-outline-primary" value="Fetch all records" ng-click="doFetchAll();"> 
+<br><br>
+          <h2>ALL RECOEDS</h2>
+          <table width="800" border="1" rules="all"><tr>
+            <th>rid</th>
+            <th>Email id</th>
+            <th>password</th>
+            <th>contact</th>
+            <th>Operations</th>
+          </tr>
+        <tr ng-repeat="obj in jsonArray">
+            <td>{{obj.rid}}</td>
+            <td>{{obj.emailid}}</td>
+            <td>{{obj.pwd}}</td>
+            <td>{{obj.contact}}</td>
+             <th>
+                <input type="button" ng-click="doDelete(obj.rid);" value="Remove">
+            </th>
+        </tr></table>
+    </center>
+
+    <nav class="navbar fixed-bottom bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" style="width:2000px; color: white;""><CENTER><i class="fa-solid fa-trophy" style="color: white;"></i> WARRIOR <i class="fa-solid fa-trophy" style="color: white;"></i></CENTER></a>
+  </div>
+</nav>
+    
+</body>
+</html>
