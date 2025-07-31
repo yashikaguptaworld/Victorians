@@ -292,45 +292,7 @@
     }
   </style>
 
-  
-<script>
-  document.getElementById("Signup").addEventListener("click", function (e) {
-    e.preventDefault();
-
-    const email = document.getElementById("txtEmail").value.trim();
-    const password = document.getElementById("txtPwd").value.trim();
-    const role = document.getElementById("combouser").value;
-
-    // Clear previous errors
-    document.getElementById("errMsgE").innerText = "";
-    document.getElementById("lblPwd").innerText = "";
-    document.getElementById("roleError").innerText = "";
-
-    let hasError = false;
-
-    if (!email) {
-      document.getElementById("errMsgE").innerText = "Email is required.";
-      hasError = true;
-    }
-
-    if (!password) {
-      document.getElementById("lblPwd").innerText = "Password is required.";
-      hasError = true;
-    }
-
-    if (!role || role === "Select") {
-      document.getElementById("roleError").innerText = "Please select a role.";
-      hasError = true;
-    }
-
-    if (!hasError) {
-      // ✅ Form is valid — proceed with submission (AJAX or actual form submit)
-      alert("Form is valid! You can now submit it.");
-      // Optionally submit via AJAX or trigger form submit:
-      // document.getElementById("signupForm").submit();
-    }
-  });
-  </script>
+ 
 </head>
 
 
@@ -343,38 +305,36 @@
     </div>
   </a>
 
-  <nav class="navbar bg-primary">
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="/pics/Screenshot 2025-07-20 100601.png" id="logo" alt="">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="/pics/Screenshot 2025-07-20 100601.png" id="logo" alt="" style="height: 40px;">
         <div class="d-inline-block align-text-top"
           style="color: white ;  margin-left: 10px; font-size: x-large; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;  font-style: italic;">
           <i class="fa-brands fa-web-awesome fa-beat"></i> VICTORIANS
         </div>
       </a>
-    </div>
-    <div class="ms-auto">
-      <div class="me-5 bg-primary" style="color: white ;margin-top:-40px;">
 
 
-
-        <div class="button-container">
-          <CENTER>
-            <button type="button" class="btn btn-primary" value="Signup" data-bs-toggle="modal"
-              data-bs-target="#divSignup" style="font-family: serif;">SIGNUP</button>
-          </CENTER>
-
-
-
-          <CENTER>
-            <button type="button" class="btn btn-primary" value="Login" data-bs-toggle="modal"
-              data-bs-target="#divLogin" style="font-family: serif;">LOGIN</button>
-          </CENTER>
-
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtons"
+        aria-controls="navbarButtons" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarButtons">
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#divSignup"
+            style="font-family: serif;">SIGNUP</button>
+          <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#divLogin"
+            style="font-family: serif;">LOGIN</button>
         </div>
       </div>
-  </nav>
 
+
+
+    </div>
+    
+  </nav>
 
 
 
@@ -668,7 +628,8 @@
               Organization Name: VICTORIANS
               <BR>Your Success starts here
               <br>
-              WEBSITE: loacalhost:2006
+              WEBSITE: https://victorians.onrender.com
+              <br>yashikagupta198922@gmail.com
               <BR>
               visit us: SAS NAGAR,SURKHPEER ROAD,BATHINDA,PUNJAB,INDIA
               <BR>
