@@ -168,7 +168,11 @@
       $("#Signup").click(function () {
         let emailid = $("#txtEmail").val();
         let pwd = $("#txtPwd").val();
-        alert(pwd);
+           
+         if (emailid === "" || pwd === "" ) {
+    alert("Please fill all fields correctly.");
+    return; 
+  }
         let obj = {
           type: "get",
           url: "/get-one",
