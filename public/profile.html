@@ -99,8 +99,6 @@
 
 <body onload="showUser();">
 
-  <form action="/play-det" method="post" enctype="multipart/form-data">
-
     
    <nav class="navbar bg-primary">
     <div class="container-fluid">
@@ -113,11 +111,12 @@
     </div>
   <br><br>
    </nav>
-     <div class="text-center mb-4">
+ <div class="container mt-4 mb-5 border border-dark rounded p-4 bg-light">
+    <div class="text-center mb-4">
       <h3><i class="fa-solid fa-user"></i> Player Profile Details</h3>
     </div>
-    
-  <!-- <div class="container row" style="width: 1000px; margin: auto; border: 2px black solid;">--> 
+
+    <form class="row g-3" action="/play-det" method="post" enctype="multipart/form-data">
 
     
       <form class="row g-3">
@@ -173,12 +172,11 @@
           <input type="text" class="form-control" id="Game4" name="Game4" required>
         </div>
         <BR>
-          ABOUT YOU
-        <div style="display: flex;">
-          <div style="flex: 1;">
-            <textarea rows="5" cols="100" id="About4" name="About4" required></textarea>
-          </div>
-        </div>
+        <div class="col-12">
+        <label for="About4" class="form-label">About You</label>
+        <textarea class="form-control" rows="4" id="About4" name="About4" required></textarea>
+      </div>
+        
 
 
 
